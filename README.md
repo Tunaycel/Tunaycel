@@ -14,7 +14,7 @@
   <a href="https://github.com/Tunaycel/portfolio">
     <img src="https://img.shields.io/badge/Portfolio-111111?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" />
   </a>
-  <img src="https://komarev.com/ghpvc/?username=Tunaycel&style=for-the-badge&color=555" alt="Profile views" />
+  <img src="https://komarev.com/ghpvc/?username=Tunaycel&style=for-the-badge&color=0e75b6" alt="Profile views" />
 </p>
 
 ---
@@ -99,7 +99,7 @@
 </p>
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Tunaycel&theme=github-dark-blue&hide_border=true" alt="GitHub streak" />
+  <img src="https://streak-stats.demolab.com?user=Tunaycel&theme=github-dark-blue&hide_border=true" alt="GitHub streak" />
 </p>
 
 ---
