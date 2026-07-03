@@ -108,17 +108,6 @@
 
 <sub>🔒 = private team repository</sub>
 
-### 📊 GitHub Stats
-
-<p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Tunaycel&theme=github_dark" alt="GitHub stats" height="180" />
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Tunaycel&theme=github_dark" alt="Top languages" height="180" />
-</p>
-
-<p align="center">
-  <img src="https://streak-stats.demolab.com/?user=Tunaycel&theme=dark&hide_border=true&background=0D1117" alt="GitHub streak" />
-</p>
-
 ---
 
 <p align="center">
