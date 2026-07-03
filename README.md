@@ -1,7 +1,7 @@
 <h1 align="center">Hüseyin Tunay Çelik</h1>
 
 <p align="center">
-  Software Developer · Cloud Security Focus · Wrocław, Poland
+  Software Developer · Full-Stack · Cloud · AI-Driven Automation · Wrocław, Poland
 </p>
 
 <p align="center">
@@ -21,8 +21,10 @@
 
 ### 🎓 About
 
+- Generalist software developer — I work across the whole stack: **frontend, backend, mobile, cloud, data and DevSecOps**
+- I use **AI functionally**, not just as a chatbot: agentic coding workflows, RAG pipelines, LLM integrations and automations are part of how I build software
 - Final-year **B.Sc. Software Development** @ WSB Merito University Wrocław *(graduating Feb 2027)*
-- Software engineering intern @ **NEST2MOVE** *(Mar–Sep 2026)*
+- Software engineering intern @ **NEST2MOVE / Pro2Move** *(Mar–Sep 2026)*
 - 🏅 **Oracle Cloud Infrastructure 2025 Certified Foundations Associate**
 - 📜 Thesis: *Automated Incident Response under Zero Trust Architecture — MTTR Reduction in Microsoft Azure IaaS* (Azure Sentinel · KQL · Logic Apps · NIST SP 800-207)
 
@@ -56,17 +58,31 @@
   <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
   <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
   <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="Redis" />
+  <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas" />
+  <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white" alt="Jupyter" />
   <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" />
 </p>
 
-**Cloud & DevOps**
+**AI & Automation**
+
+<p>
+  <img src="https://img.shields.io/badge/Claude-D97757?style=for-the-badge&logo=claude&logoColor=white" alt="Claude" />
+  <img src="https://img.shields.io/badge/Gemini-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini" />
+  <img src="https://img.shields.io/badge/RAG_Pipelines-1a1a2e?style=for-the-badge" alt="RAG" />
+  <img src="https://img.shields.io/badge/Agentic_Coding-0b3d2e?style=for-the-badge" alt="Agentic coding" />
+  <img src="https://img.shields.io/badge/n8n-EA4B71?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n" />
+</p>
+
+**Cloud & DevSecOps**
 
 <p>
   <img src="https://img.shields.io/badge/Microsoft_Azure-0078D4?style=for-the-badge&logoColor=white" alt="Azure" />
-  <img src="https://img.shields.io/badge/Oracle_Cloud-F80000?style=for-the-badge&logo=oracle&logoColor=white" alt="OCI" />
   <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonwebservices&logoColor=white" alt="AWS" />
+  <img src="https://img.shields.io/badge/Oracle_Cloud-F80000?style=for-the-badge&logo=oracle&logoColor=white" alt="OCI" />
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
   <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" />
+  <img src="https://img.shields.io/badge/OWASP_ZAP-00549E?style=for-the-badge" alt="OWASP ZAP" />
   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
 </p>
 
@@ -87,6 +103,7 @@
 | [**portfolio**](https://github.com/Tunaycel/portfolio) | Zero Trust themed cinematic WebGL portfolio — 4,500-particle GLSL hero, terminal boot sequence, text decryption. | Next.js 14 · React Three Fiber |
 | [**CVForge**](https://github.com/Tunaycel/-CVForge) | AI-powered CV builder, deployed on AWS Elastic Beanstalk. | Python · AWS EB |
 | [**ai-assistant-bot**](https://github.com/Tunaycel/ai-assistant-bot) | RAG document analysis chatbot. | Streamlit · Gemini |
+| [**globallife-ai**](https://github.com/Tunaycel/globallife-ai) | AI-powered web application. | Next.js · TypeScript |
 | [**3d-solar-system-simulator**](https://github.com/Tunaycel/3d-solar-system-simulator) | Real-time 3D solar system simulation. | Python · OpenGL |
 
 <sub>🔒 = private team repository</sub>
@@ -99,7 +116,7 @@
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=Tunaycel&theme=github-dark-blue&hide_border=true" alt="GitHub streak" />
+  <img src="https://streak-stats.demolab.com/?user=Tunaycel&theme=dark&hide_border=true&background=0D1117" alt="GitHub streak" />
 </p>
 
 ---
