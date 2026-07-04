@@ -77,6 +77,8 @@
 
 <p>
   <img src="https://img.shields.io/badge/Microsoft_Azure-0078D4?style=for-the-badge&logoColor=white" alt="Azure" />
+  <img src="https://img.shields.io/badge/Azure_Sentinel-0078D4?style=for-the-badge&logoColor=white" alt="Azure Sentinel" />
+  <img src="https://img.shields.io/badge/KQL-2C5898?style=for-the-badge&logoColor=white" alt="KQL" />
   <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonwebservices&logoColor=white" alt="AWS" />
   <img src="https://img.shields.io/badge/Oracle_Cloud-F80000?style=for-the-badge&logo=oracle&logoColor=white" alt="OCI" />
   <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
@@ -98,8 +100,8 @@
 
 | Project | Description | Stack |
 |---|---|---|
-| **EmlakPlus AI** 🔒 | Real-estate CRM & marketing automation SaaS — frontend owner in a 3-person team. AI template studio: photo slot detection → server-side compositing. | Next.js 16 · React 19 · Tailwind v4 |
-| **data-stock** 🔒 | Scan-based, multi-user inventory management replacing Excel — barcode scanning on web & mobile, campaign/discount pricing engine. | FastAPI · PostgreSQL · Expo |
+| **EmlakPlus AI** 🔒 [📖 case study](https://github.com/Tunaycel/emlakplus-ai-case-study) | Real-estate CRM & marketing automation SaaS — frontend owner in a 3-person team. AI template studio: photo slot detection → server-side compositing. | Next.js 16 · React 19 · Tailwind v4 |
+| **data-stock** 🔒 [📖 case study](https://github.com/Tunaycel/data-stock-case-study) | Scan-based inventory management replacing Excel — I built the campaign/discount pricing engine and the multi-warehouse foundation. | FastAPI · PostgreSQL · Expo |
 | [**portfolio**](https://github.com/Tunaycel/portfolio) | Zero Trust themed cinematic WebGL portfolio — 4,500-particle GLSL hero, terminal boot sequence, text decryption. | Next.js 14 · React Three Fiber |
 | [**CVForge**](https://github.com/Tunaycel/-CVForge) | AI-powered CV builder, deployed on AWS Elastic Beanstalk. | Python · AWS EB |
 | [**ai-assistant-bot**](https://github.com/Tunaycel/ai-assistant-bot) | RAG document analysis chatbot. | Streamlit · Gemini |
