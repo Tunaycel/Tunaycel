@@ -45,7 +45,6 @@
 | [**CVForge**](https://github.com/Tunaycel/-CVForge) | AI-powered CV builder, deployed on AWS Elastic Beanstalk. | Python · AWS EB |
 | [**ai-assistant-bot**](https://github.com/Tunaycel/ai-assistant-bot) | RAG document analysis chatbot. | Streamlit · Gemini |
 | [**globallife-ai**](https://github.com/Tunaycel/globallife-ai) | AI-powered web application. | Next.js · TypeScript |
-| [**3d-solar-system-simulator**](https://github.com/Tunaycel/3d-solar-system-simulator) | Real-time 3D solar system simulation. | Python · OpenGL |
 
 <sub>(private) = private team repository</sub>
 
