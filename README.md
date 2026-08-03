@@ -21,17 +21,6 @@
 - **Oracle Cloud Infrastructure 2025 Certified Foundations Associate**
 - Thesis: *Automated Incident Response under Zero Trust Architecture — MTTR Reduction in Microsoft Azure IaaS* (Azure Sentinel · KQL · Logic Apps · NIST SP 800-207)
 
-### In numbers
-
-| | |
-|---|---|
-| Merged pull requests across all projects | **98** |
-| Into a production SaaS that auto-deploys on merge | **39** |
-| Largest contribution window | 69 commits, **+16,579 / −10,057** lines |
-| Dead code removed in a single PR | **~2,300** lines |
-| Automated tests written | **21** pytest cases |
-| Stars across public repositories | **42** |
-
 ### Tech Stack
 
 **Languages** — Python · TypeScript · JavaScript · SQL · Bash
@@ -50,7 +39,7 @@
 
 | Project | Description | Stack |
 |---|---|---|
-| **EmlakPlus AI** (private) [case study](https://github.com/Tunaycel/emlakplus-ai-case-study) | Real-estate CRM & marketing automation SaaS — frontend owner in a 3-person team. AI template studio: photo slot detection → server-side compositing. **39 merged PRs, 69 commits, +16,579 / −10,057 lines.** | Next.js 16 · React 19 · Tailwind v4 |
+| **EmlakPlus AI** (private) [case study](https://github.com/Tunaycel/emlakplus-ai-case-study) | Real-estate CRM & marketing automation SaaS — frontend owner in a 3-person team. AI template studio: photo slot detection → server-side compositing. | Next.js 16 · React 19 · Tailwind v4 |
 | **data-stock** (private) [case study](https://github.com/Tunaycel/data-stock-case-study) | Scan-based inventory management replacing Excel — I built the campaign/discount pricing engine and the multi-warehouse foundation. | FastAPI · PostgreSQL · Expo |
 | [**portfolio**](https://github.com/Tunaycel/portfolio) | Zero Trust themed cinematic WebGL portfolio — 4,500-particle GLSL hero, terminal boot sequence, text decryption. | Next.js 14 · React Three Fiber |
 | [**CVForge**](https://github.com/Tunaycel/-CVForge) | AI-powered CV builder, deployed on AWS Elastic Beanstalk. | Python · AWS EB |
