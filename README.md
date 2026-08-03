@@ -1,101 +1,116 @@
 # Hüseyin Tunay Çelik
 
-Software developer in Wrocław, Poland. I work mostly on the frontend of production systems
-and on the security side of cloud infrastructure. Final-year B.Sc. Software Development at
-WSB Merito University, graduating February 2027.
+Software Developer · Full-Stack · Cloud · AI-Driven Automation · Wrocław, Poland
 
-Currently: frontend engineer on a real-estate SaaS shipping to a live pilot, and writing a
-thesis on measuring incident-response time under Zero Trust in Azure.
-
----
-
-## What I've shipped
-
-**PlusEmlak** — real-estate CRM and marketing-automation SaaS · private repo · 3-person team,
-I own the frontend
-[· case study](https://github.com/Tunaycel/emlakplus-ai-case-study)
-
-39 merged PRs and 69 commits between June and July 2026, +16,579 / −10,057 lines in
-`frontend/` excluding lockfiles and image assets. Next.js 16 · React 19 · Tailwind v4.
-Merges to `main` auto-deploy to the pilot environment, so every PR had to be releasable.
-
-The work I'd point at:
-
-- **Template studio** — photo upload → server-side slot detection → compositing → social
-  share. Three screens plus the client-side canvas fallback that keeps the flow alive when
-  the compositor times out. Verified end to end with Playwright.
-- **Bug sweep (PR #166)** — removed ~2,300 lines of dead 3D/neon components and fixed the
-  bugs behind them: a hard-refresh logout caused by `AuthContext` clearing the token on any
-  failed `/auth/me`, three memory leaks (one an infinite refetch loop rooted in a toast),
-  race conditions on three route components, and skeleton-flash across nine pages via a
-  250 ms `useDelayedFlag` hook.
-- **Template refactor (PR #91)** — net −196 lines: deleted dead code, pulled duplicated
-  canvas logic into one helper, and moved the manual sliders behind an advanced toggle so
-  the automatic path became the default.
-
-**PazarPilot** — multi-channel e-commerce integration panel · private repo
-· Next.js · Prisma · PostgreSQL
-
-38 merged PRs over two weeks, ~338k lines of TypeScript. Trendyol / Hepsiburada order sync,
-warehouse management, shipping, and a reconciliation module. `gitleaks` in CI.
-
-**[AI Producer Platform](https://github.com/Tunaycel/ai-producer-platform)** — public ·
-FastAPI · React 19 · Python DSP
-
-19 merged PRs. Five endpoints over ~800 lines of Python and ~4,700 of TypeScript, 21 pytest
-cases. Real signal processing rather than a wrapper around a generation API: BPM via
-onset-strength beat tracking and key via Krumhansl–Schmuckler chroma correlation (librosa),
-and a highpass → shelf → presence → compressor → limiter mastering chain (Pedalboard). The
-README says plainly which parts are not integrated yet.
-
-**data-stock** — scan-based inventory system replacing spreadsheet stock tracking · private
-repo · FastAPI · PostgreSQL · Expo
-[· case study](https://github.com/Tunaycel/data-stock-case-study)
-
-I built the campaign and discount pricing engine and the multi-warehouse foundation.
+[LinkedIn](https://www.linkedin.com/in/h%C3%BCseyin-tunay-%C3%A7elik-4506522a4) ·
+[h.tunaycelik@gmail.com](mailto:h.tunaycelik@gmail.com) ·
+[Portfolio](https://github.com/Tunaycel/portfolio)
 
 ---
 
-## Thesis
+## About
 
-*Automated Incident Response under Zero Trust Architecture: An Empirical Evaluation of MTTR
-Reduction in Microsoft Azure IaaS* — WSB Merito Wrocław, February 2026 – February 2027,
-supervised by Paweł Sikora.
+Generalist software developer. I work across the whole stack — frontend, backend, mobile,
+cloud, data and DevSecOps — and I pick the layer the problem lives on rather than the one
+I'm most comfortable in.
 
-Azure Sentinel, KQL detection rules, Logic Apps playbooks and NSG isolation, built against
-NIST SP 800-207. It is an empirical study, so the point is the measurement: mean time to
-respond with and without automated containment, detection accuracy, and false-positive rate
-under a fixed attack scenario set. Targets are ≥60% MTTR reduction, ≥95% detection accuracy
-and ≤1% false positives — targets, not results; the lab is still being built.
+I use AI functionally, not as a chatbot: agentic coding workflows, RAG pipelines, LLM
+integrations and automations are part of how I build. What I ship is reviewed and cut down
+before it reaches a branch — across the projects below that has meant more deleted lines
+than most features add.
+
+- Final-year **B.Sc. Software Development**, WSB Merito University Wrocław — graduating
+  February 2027
+- Software engineering intern at **NEST2MOVE / Pro2Move**, March – September 2026
+- **Oracle Cloud Infrastructure 2025 Certified Foundations Associate**
+- Thesis: *Automated Incident Response under Zero Trust Architecture — MTTR Reduction in
+  Microsoft Azure IaaS* (Azure Sentinel · KQL · Logic Apps · NIST SP 800-207)
 
 ---
 
-## Other public work
+## By the numbers
 
 | | |
 |---|---|
-| [CVForge](https://github.com/Tunaycel/-CVForge) | CV builder with ATS scoring and PDF generation, deployed on AWS Elastic Beanstalk |
-| [globallife-ai](https://github.com/Tunaycel/globallife-ai) | Next.js + TypeScript web app, Google OAuth via NextAuth |
-| [ai-assistant-bot](https://github.com/Tunaycel/ai-assistant-bot) | RAG document analysis over Gemini, Streamlit UI, SQLite-backed sessions |
-| [3d-solar-system-simulator](https://github.com/Tunaycel/3d-solar-system-simulator) | Real-time orbital simulation in Python + OpenGL |
-| [focusss-project](https://focusss-project.vercel.app) | Pomodoro PWA — [live](https://focusss-project.vercel.app) |
+| Merged pull requests across all projects | **98** |
+| Into a production SaaS with auto-deploy on merge | **39** |
+| Largest single contribution window | 69 commits, +16,579 / −10,057 lines in one quarter |
+| Dead code removed in a single PR | ~2,300 lines |
+| Automated tests written | 21 pytest cases (AI Producer Platform) |
+| Stars across public repositories | 42 |
 
 ---
 
-## Tools I actually use
+## Selected work
 
-TypeScript · Python · Next.js · React · Tailwind · FastAPI · PostgreSQL · Prisma · Docker ·
-GitHub Actions · Azure (Sentinel, KQL, Logic Apps) · AWS Elastic Beanstalk · Playwright ·
-pytest
+**EmlakPlus AI** — private repo · [case study](https://github.com/Tunaycel/emlakplus-ai-case-study)
+`Next.js 16 · React 19 · Tailwind v4`
 
-Oracle Cloud Infrastructure 2025 Certified Foundations Associate, January 2026.
+Real-estate CRM and marketing-automation SaaS. Frontend owner in a 3-person team:
+39 merged PRs, 69 commits, +16,579 / −10,057 lines. Merges to `main` auto-deploy to the
+pilot environment, so every PR had to be releasable.
 
-I use AI coding tools daily and treat their output as a draft: it gets reviewed, cut down,
-and tested before it goes near a branch. The dead-code deletions above are mostly that.
+Built the AI template studio end to end — photo upload, server-side slot detection,
+compositing, social share — with a client-side canvas fallback so the flow survives a
+compositor timeout. Verified with Playwright. One bug-sweep PR removed ~2,300 lines of dead
+components and fixed what they were hiding: a hard-refresh logout caused by the auth context
+clearing its token on any failed session check, three memory leaks, race conditions on three
+route components, and skeleton-flash across nine pages.
+
+**data-stock** — private repo · [case study](https://github.com/Tunaycel/data-stock-case-study)
+`FastAPI · PostgreSQL · Expo`
+
+Scan-based inventory system replacing spreadsheet stock tracking. I built the campaign and
+discount pricing engine and the multi-warehouse foundation.
+
+**[AI Producer Platform](https://github.com/Tunaycel/ai-producer-platform)**
+`FastAPI · React 19 · Python DSP`
+
+Vocal-first music production. 19 merged PRs, 5 endpoints, 21 pytest cases. Real signal
+processing rather than a wrapper around a generation API: BPM via onset-strength beat
+tracking and key via Krumhansl–Schmuckler chroma correlation (librosa), and a
+highpass → shelf → presence → compressor → limiter mastering chain (Pedalboard). The README
+states which parts are not integrated yet.
+
+**[portfolio](https://github.com/Tunaycel/portfolio)** `Next.js 14 · React Three Fiber`
+
+Cinematic WebGL portfolio. One scroll value drives a camera along a fixed rail through a
+persistent 3D world; damping is exponential in frame delta, so motion is identical at 60 and
+144 Hz. 135 kB first-load JS.
+
+**[CVForge](https://github.com/Tunaycel/-CVForge)** `Python · AWS Elastic Beanstalk` — 10 stars
+
+AI-powered CV builder with ATS scoring and PDF generation, deployed on Elastic Beanstalk.
+
+**[globallife-ai](https://github.com/Tunaycel/globallife-ai)** `Next.js · TypeScript` — 12 stars
+
+AI web application, Google OAuth through NextAuth.
+
+**[ai-assistant-bot](https://github.com/Tunaycel/ai-assistant-bot)** `Streamlit · Gemini` — 9 stars
+
+RAG document-analysis chatbot with multi-session history and SQLite-backed memory.
+
+**[3d-solar-system-simulator](https://github.com/Tunaycel/3d-solar-system-simulator)** `Python · OpenGL` — 9 stars
+
+Real-time 3D solar system simulation.
 
 ---
 
-Software engineering intern at NEST2MOVE / Pro2Move, March – September 2026.
+## Stack
 
-[LinkedIn](https://www.linkedin.com/in/h%C3%BCseyin-tunay-%C3%A7elik-4506522a4) ·
-[h.tunaycelik@gmail.com](mailto:h.tunaycelik@gmail.com)
+**Languages** — Python · TypeScript · JavaScript · SQL · Bash
+
+**Frontend & mobile** — React 19 · Next.js · React Native · Expo · Tailwind CSS · Three.js · Vite
+
+**Backend & data** — FastAPI · PostgreSQL · Redis · Pandas · Jupyter · Streamlit
+
+**AI & automation** — Claude · Gemini · RAG pipelines · agentic coding workflows · n8n
+
+**Cloud & DevSecOps** — Azure (Sentinel, KQL) · AWS · Oracle Cloud · Linux · Docker ·
+GitHub Actions · OWASP ZAP · Git
+
+**Testing** — Playwright · Vitest · pytest
+
+---
+
+Open to software engineering opportunities.
