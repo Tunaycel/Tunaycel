@@ -43,8 +43,8 @@
 | **data-stock** (private) [case study](https://github.com/Tunaycel/data-stock-case-study) | Scan-based inventory management replacing Excel — I built the campaign/discount pricing engine and the multi-warehouse foundation. | FastAPI · PostgreSQL · Expo |
 | [**portfolio**](https://github.com/Tunaycel/portfolio) | Zero Trust themed cinematic WebGL portfolio — 4,500-particle GLSL hero, terminal boot sequence, text decryption. | Next.js 14 · React Three Fiber |
 | [**CVForge**](https://github.com/Tunaycel/-CVForge) | AI-powered CV builder, deployed on AWS Elastic Beanstalk. | Python · AWS EB |
-| [**ai-assistant-bot**](https://github.com/Tunaycel/ai-assistant-bot) | RAG document analysis chatbot. | Streamlit · Gemini |
-| [**globallife-ai**](https://github.com/Tunaycel/globallife-ai) | AI-powered web application. | Next.js · TypeScript |
+| [**ai-assistant-bot**](https://github.com/Tunaycel/ai-assistant-bot) | Document analysis chatbot — multi-session SQLite history, runtime Gemini model fallback. | Streamlit · Gemini |
+| [**globallife**](https://github.com/Tunaycel/globallife) | Relocation platform front-end — visa & language dashboards, Google OAuth, three.js scenes, 4-locale i18n. | Next.js 16 · React 19 |
 
 <sub>(private) = private team repository</sub>
 
