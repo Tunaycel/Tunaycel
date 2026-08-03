@@ -42,7 +42,7 @@
 | **EmlakPlus AI** (private) [case study](https://github.com/Tunaycel/emlakplus-ai-case-study) | Real-estate CRM & marketing automation SaaS — frontend owner in a 3-person team. AI template studio: photo slot detection → server-side compositing. | Next.js 16 · React 19 · Tailwind v4 |
 | **data-stock** (private) [case study](https://github.com/Tunaycel/data-stock-case-study) | Scan-based inventory management replacing Excel — I built the campaign/discount pricing engine and the multi-warehouse foundation. | FastAPI · PostgreSQL · Expo |
 | [**portfolio**](https://github.com/Tunaycel/portfolio) | Personal site built as one scroll-driven descent — a persistent 3D world with the camera on a damped rail. | Next.js 14 · React Three Fiber |
-| [**CVForge**](https://github.com/Tunaycel/-CVForge) | CV builder on Flask + DynamoDB + S3, with Gemini tailoring to a job description. | Python · AWS |
+| [**cvforge**](https://github.com/Tunaycel/cvforge) | CV builder on Flask + DynamoDB + S3, with Gemini tailoring to a job description. | Python · AWS |
 | [**ai-assistant-bot**](https://github.com/Tunaycel/ai-assistant-bot) | Document analysis chatbot — multi-session SQLite history, runtime Gemini model fallback. | Streamlit · Gemini |
 | [**globallife**](https://github.com/Tunaycel/globallife) | Relocation platform front-end — visa & language dashboards, Google OAuth, three.js scenes, 4-locale i18n. | Next.js 16 · React 19 |
 
