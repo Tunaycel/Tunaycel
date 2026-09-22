@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://www.linkedin.com/in/h%C3%BCseyin-tunay-%C3%A7elik-4506522a4">LinkedIn</a> ·
-  <a href="mailto:h.tunaycelik@gmail.com">h.tunaycelik@gmail.com</a> ·
+  <a href="mailto:h.tunay.celik@gmail.com">h.tunaycelik@gmail.com</a> ·
   <a href="https://github.com/Tunaycel/portfolio">Portfolio</a>
 </p>
 
