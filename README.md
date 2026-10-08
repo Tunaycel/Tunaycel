@@ -1,10 +1,10 @@
 <img alt="Terminal session: Hüseyin Tunay Çelik, full-stack engineer, AI researcher and agent orchestrator, bug hunter" src="assets/header.svg" width="100%">
 
 <p align="center">
-  <a href="https://www.huseyintunaycelik.xyz"><img alt="Portfolio: huseyintunaycelik.xyz" src="assets/btn-portfolio.svg" height="56"></a>
-  <a href="https://linkedin.com/in/huseyin-tunay-celik"><img alt="LinkedIn: huseyin-tunay-celik" src="assets/btn-linkedin.svg" height="56"></a>
-  <a href="mailto:h.tunay.celik@gmail.com"><img alt="Email: h.tunay.celik@gmail.com" src="assets/btn-email.svg" height="56"></a>
-  <img alt="Oracle Cloud Infrastructure 2025 Certified Foundations Associate" src="assets/btn-oracle.svg" height="56">
+  <a href="https://www.huseyintunaycelik.xyz"><img alt="Portfolio: huseyintunaycelik.xyz" src="assets/btn-portfolio.svg" height="48"></a>
+  <a href="https://linkedin.com/in/huseyin-tunay-celik"><img alt="LinkedIn: huseyin-tunay-celik" src="assets/btn-linkedin.svg" height="48"></a>
+  <a href="mailto:h.tunay.celik@gmail.com"><img alt="Email: h.tunay.celik@gmail.com" src="assets/btn-email.svg" height="48"></a>
+  <img alt="Oracle Cloud Infrastructure 2025 Certified Foundations Associate" src="assets/btn-oracle.svg" height="48">
 </p>
 
 I build web, mobile and desktop software end to end, from the React screen to the API, the database and the cloud it runs on.
