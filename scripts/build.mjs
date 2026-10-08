@@ -61,13 +61,6 @@ async function profile() {
 
 // ---------- numbers ----------
 
-function median(xs) {
-  if (!xs.length) return 0;
-  const s = [...xs].sort((a, b) => a - b);
-  const m = Math.floor(s.length / 2);
-  return s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2);
-}
-
 function streaks(days) {
   let longest = 0;
   let run = 0;
@@ -78,10 +71,21 @@ function streaks(days) {
   return longest;
 }
 
+// Stylesheets and markup say little about what I write, so the bar counts code only.
+const MARKUP = new Set(['CSS', 'SCSS', 'HTML', 'Dockerfile', 'Procfile']);
+
+const topOf = (prs) => [...prs].sort((a, b) => b.repository.stargazerCount - a.repository.stargazerCount)[0];
+
+function topRepo(prs) {
+  const top = topOf(prs);
+  return top ? `${top.repository.nameWithOwner.split('/')[1]} · ${fmt(top.repository.stargazerCount)} stars` : 'none yet';
+}
+
 function languages(repos) {
   const totals = new Map();
   for (const r of repos) {
     for (const e of r.languages.edges) {
+      if (MARKUP.has(e.node.name)) continue;
       const cur = totals.get(e.node.name) || { size: 0, color: e.node.color || '#8b949e' };
       cur.size += e.size;
       totals.set(e.node.name, cur);
@@ -108,7 +112,7 @@ const THEMES = {
 const FONT = `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif`;
 const MONO = `ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace`;
 
-// The header is a dark terminal that replays a short session: it opens on the first screen of it, clears,
+// The header is a dark terminal under a fixed name line. It replays a short session: it opens on the first screen, clears,
 // types each command, prints the answer and scrolls like a real shell. Without SMIL it stays on that first screen.
 const TERM = {
   bg: '#0d1117', bar: '#161b22', line: '#30363d', text: '#e6edf3', muted: '#8b949e',
@@ -116,41 +120,41 @@ const TERM = {
 };
 
 const SESSION = [
-  ['whoami', [[['text', 'Hüseyin Tunay Çelik', 700], ['muted', '  software engineer · Wrocław, Poland']]]],
-  ['cat role.yml', [[['cyan', 'role'], ['muted', ': '], ['text', '[full-stack, ai-research, agent-orchestration, bug-hunting]']]]],
+  ['whoami', [[['text', 'software engineer'], ['muted', ' · full-stack, cloud & AI · Wrocław, Poland']]]],
+  ['cat role.yml', [[['cyan', 'role'], ['muted', ': '], ['text', '[full-stack, cloud, ai-engineering, bug-fixing]']]]],
   ['ls ~/work', [[
-    ['blue', 'bluesense/'], ['muted', ' aws infra + 2 apps   '],
-    ['blue', 'voxgig/'], ['muted', ' oss contributor   '],
-    ['blue', 'nest2move/'], ['muted', ' b2b saas   '],
-    ['blue', 'birthday-msg/'], ['muted', ' admin'],
+    ['blue', 'bluesense/'], ['muted', '   '], ['blue', 'voxgig/'], ['muted', '   '],
+    ['blue', 'nest2move/'], ['muted', '   '], ['blue', 'birthday-msg/'],
   ]]],
-  ['./research --ai', [[
-    ['green', '✓'], ['text', ' llm evals   '], ['green', '✓'], ['text', ' ai control   '],
-    ['green', '✓'], ['text', ' multi-agent pipelines   '], ['muted', '# since llms went mainstream'],
-  ]]],
-  ['git log --upstream --oneline', [[
-    ['yellow', 'assistant-ui'], ['muted', ' ★12.4k · '], ['yellow', 'control-arena'], ['muted', ' · '],
-    ['yellow', 'voxgig/apidef'], ['text', '   reproduce → fix → ship upstream'],
-  ]]],
-  ['cat thesis.md', [[
-    ['purple', '# '], ['text', 'Automated incident response under Zero Trust'],
-    ['muted', ' · Sentinel · KQL · Logic Apps · '], ['green', 'MTTR ↓'],
-  ]]],
-  ['echo $STATUS', [[['green', '●'], ['text', ' open to full-time roles'], ['muted', ' · Wrocław · hybrid · remote (EU)']]]],
+  ['git log --upstream', null],
+  ['cat thesis.md', [[['purple', '# '], ['text', 'Automated incident response · Zero Trust · Azure']]]],
+  ['echo $STATUS', [[['green', '●'], ['text', ' open to full-time roles'], ['muted', ' · hybrid · remote (EU)']]]],
 ];
 
-function headerSvg() {
+// The upstream line is built from the same API data as the cards, so it never claims more than GitHub shows.
+function upstreamLine(m) {
+  const segs = [['yellow', m.ossTopName], ['muted', ` ★${fmt(m.ossTopStars)} `], ['green', `${m.ossMerged} merged`]];
+  const open = m.ossOpenNames.slice(0, 2);
+  if (open.length) {
+    segs.push(['muted', ' · ']);
+    open.forEach((n, i) => segs.push(['yellow', n], ['muted', i < open.length - 1 ? ', ' : '']));
+    segs.push(['muted', ' in review']);
+  }
+  return [segs];
+}
+
+function headerSvg(m) {
   const t = TERM;
   const W = 840;
-  const FS = 13;
+  const FS = 16;
   const CW = FS * 0.6; // forced glyph width, so the caret can follow the typing
-  const LH = 21;
-  const X0 = 22;
+  const LH = 25;
+  const X0 = 24;
   const XT = X0 + CW * 4;
-  const VISIBLE = 8;
-  const BODY_TOP = 44;
-  const TOP = BODY_TOP + 20;
-  const H = BODY_TOP + VISIBLE * LH + 14 + 26;
+  const VISIBLE = 6;
+  const BODY_TOP = 104;
+  const TOP = BODY_TOP + 26;
+  const H = BODY_TOP + VISIBLE * LH + 18 + 26;
   const TYPE = 0.06;
   const ENTER = 0.4;
   const READ = 1.2;
@@ -158,7 +162,8 @@ function headerSvg() {
 
   const rows = [];
   let t0 = HOLD + 0.8;
-  for (const [cmd, out] of SESSION) {
+  for (const [cmd, given] of SESSION) {
+    const out = given || upstreamLine(m);
     const typed = t0 + cmd.length * TYPE;
     rows.push({ kind: 'cmd', text: cmd, start: t0, end: typed, appear: t0 - 0.35 });
     out.forEach((segs, i) => rows.push({ kind: 'out', segs, appear: typed + ENTER + i * 0.08 }));
@@ -185,13 +190,13 @@ function headerSvg() {
         return `<text xml:space="preserve" x="${XT}" y="${y}" font-family="${MONO}" font-size="${FS}">${spans}${shown(r)}</text>`;
       }
       if (r.kind === 'end') {
-        return `<g>${shown(r)}${prompt(y)}<rect class="caret" x="${XT}" y="${y - 11}" width="${CW}" height="14" fill="${t.text}"/></g>`;
+        return `<g>${shown(r)}${prompt(y)}<rect class="caret" x="${XT}" y="${y - 13}" width="${CW}" height="17" fill="${t.text}"/></g>`;
       }
       const w = r.text.length * CW;
-      return `<clipPath id="c${n}"><rect x="${XT}" y="${y - 15}" width="${w + 2}" height="${LH}"><animate attributeName="width" ${A} values="${w + 2};${w + 2};0;0;${w + 2};${w + 2}" keyTimes="0;${k(HOLD - 0.01)};${k(HOLD)};${k(r.start)};${k(r.end)};1"/></rect></clipPath>
+      return `<clipPath id="c${n}"><rect x="${XT}" y="${y - 18}" width="${w + 2}" height="${LH}"><animate attributeName="width" ${A} values="${w + 2};${w + 2};0;0;${w + 2};${w + 2}" keyTimes="0;${k(HOLD - 0.01)};${k(HOLD)};${k(r.start)};${k(r.end)};1"/></rect></clipPath>
 <g>${shown(r)}${prompt(y)}</g>
 <text clip-path="url(#c${n})" x="${XT}" y="${y}" fill="${t.text}" font-family="${MONO}" font-size="${FS}" textLength="${w}" lengthAdjust="spacing">${esc(r.text)}</text>
-<rect x="${XT + w + 2}" y="${y - 11}" width="${CW}" height="14" fill="${t.text}" opacity="0"><animate attributeName="opacity" ${A} calcMode="discrete" values="0;1;0" keyTimes="0;${k(r.appear)};${k(r.end + ENTER)}"/><animate attributeName="x" ${A} values="${XT};${XT};${XT + w + 2};${XT + w + 2}" keyTimes="0;${k(r.start)};${k(r.end)};1"/></rect>`;
+<rect x="${XT + w + 2}" y="${y - 13}" width="${CW}" height="17" fill="${t.text}" opacity="0"><animate attributeName="opacity" ${A} calcMode="discrete" values="0;1;0" keyTimes="0;${k(r.appear)};${k(r.end + ENTER)}"/><animate attributeName="x" ${A} values="${XT};${XT};${XT + w + 2};${XT + w + 2}" keyTimes="0;${k(r.start)};${k(r.end)};1"/></rect>`;
     })
     .join('\n');
 
@@ -207,24 +212,27 @@ function headerSvg() {
     `<rect x="10" y="${SB + 5}" width="62" height="16" rx="3" fill="${t.green}"/>`,
     `<text x="41" y="${SB + 17}" text-anchor="middle" fill="${t.bg}" font-family="${MONO}" font-size="11" font-weight="700">NORMAL</text>`,
     `<text x="84" y="${SB + 17}" fill="${t.purple}" font-family="${MONO}" font-size="11.5">git:(main)</text>`,
-    `<text x="168" y="${SB + 17}" fill="${t.muted}" font-family="${MONO}" font-size="11.5">~/Tunaycel/README.md</text>`,
-    `<text xml:space="preserve" x="${W - 12}" y="${SB + 17}" text-anchor="end" fill="${t.muted}" font-family="${MONO}" font-size="11.5"><tspan fill="${t.blue}">TypeScript</tspan> · <tspan fill="${t.yellow}">Python</tspan> · <tspan fill="${t.red}">Rust</tspan> · AWS · Azure   utf-8   51.1°N 17.0°E</text>`,
+    `<text x="168" y="${SB + 17}" fill="${t.muted}" font-family="${MONO}" font-size="11.5">README.md</text>`,
+    `<text xml:space="preserve" x="${W - 12}" y="${SB + 17}" text-anchor="end" fill="${t.muted}" font-family="${MONO}" font-size="11.5"><tspan fill="${t.blue}">TypeScript</tspan> · <tspan fill="${t.yellow}">Python</tspan> · AWS · Azure   utf-8</text>`,
   ].join('\n');
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Hüseyin Tunay Çelik: full-stack engineer, AI researcher and agent orchestrator, bug hunter. Thesis on automated incident response under Zero Trust on Azure. Open to full-time roles.">
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Hüseyin Tunay Çelik, software engineer in Wrocław: full-stack, cloud and AI engineering. Five merged fixes in assistant-ui. Thesis on automated incident response under Zero Trust on Azure. Open to full-time roles.">
 <style>
 .caret{animation:blink 1.1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 @media (prefers-reduced-motion: reduce){.caret{animation:none}}
 </style>
-<defs><clipPath id="win"><rect x="0" y="${BODY_TOP + 6}" width="${W}" height="${TOP + (VISIBLE - 1) * LH + 6 - (BODY_TOP + 6)}"/></clipPath>
+<defs><clipPath id="win"><rect x="0" y="${BODY_TOP + 4}" width="${W}" height="${TOP + (VISIBLE - 1) * LH + 7 - (BODY_TOP + 4)}"/></clipPath>
 <clipPath id="frame"><rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="10"/></clipPath></defs>
 <g clip-path="url(#frame)">
 <rect width="${W}" height="${H}" fill="${t.bg}"/>
 <rect width="${W}" height="34" fill="${t.bar}"/>
 <line x1="0" y1="34.5" x2="${W}" y2="34.5" stroke="${t.line}"/>
 <circle cx="18" cy="17" r="5.5" fill="#ff5f57"/><circle cx="36" cy="17" r="5.5" fill="#febc2e"/><circle cx="54" cy="17" r="5.5" fill="#28c840"/>
-<text x="${W / 2}" y="21.5" text-anchor="middle" fill="${t.muted}" font-family="${MONO}" font-size="12">Hüseyin Tunay Çelik — ~/github/Tunaycel — zsh</text>
+<text x="${W / 2}" y="21.5" text-anchor="middle" fill="${t.muted}" font-family="${MONO}" font-size="12">~/github/Tunaycel — zsh</text>
+<text x="${X0}" y="76" fill="${t.text}" font-family="${FONT}" font-size="28" font-weight="700">Hüseyin Tunay Çelik</text>
+<text x="${W - X0}" y="76" text-anchor="end" fill="${t.muted}" font-family="${FONT}" font-size="15">Software Engineer · Wrocław</text>
+<line x1="${X0}" y1="${BODY_TOP - 2}" x2="${W - X0}" y2="${BODY_TOP - 2}" stroke="${t.line}" stroke-dasharray="3 4"/>
 <g clip-path="url(#win)"><g>${scroll}
 ${body}
 </g></g>
@@ -267,10 +275,10 @@ function metricsSvg(t, m) {
   const W = 840;
   const H = 360;
   const tiles = [
-    [fmt(m.mergedPrs), 'merged pull requests', 'public repositories'],
-    [fmt(m.ossMerged), 'merged upstream', `${m.ossRepos} ${m.ossRepos === 1 ? 'project' : 'projects'} · ${fmt(m.ossStars)} stars`],
+    [fmt(m.ossMerged), 'merged upstream', `in ${m.ossTop}`],
+    [fmt(m.ossOpen), 'in review upstream', m.ossOpenNames.length === 1 ? `in ${m.ossOpenNames[0]}` : `across ${m.ossOpenNames.length} projects`],
+    [fmt(m.ownMerged), 'PRs in my own repos', 'public repositories'],
     [fmt(m.contributions), 'contributions', 'last 12 months'],
-    [fmt(m.medianPr), 'median lines per PR', 'small, reviewable changes'],
   ];
   const tw = (W - 48 - 3 * 12) / 4;
   const tileSvg = tiles
@@ -338,33 +346,24 @@ ${legend}
 
 function ossSection(merged, open) {
   const byRepo = new Map();
-  for (const pr of merged) {
+  const add = (pr, key) => {
     const k = pr.repository.nameWithOwner;
-    if (!byRepo.has(k)) byRepo.set(k, { repo: pr.repository, prs: [] });
-    byRepo.get(k).prs.push(pr);
-  }
-  const rows = [...byRepo.values()]
-    .sort((a, b) => b.repo.stargazerCount - a.repo.stargazerCount || b.prs.length - a.prs.length)
-    .map(({ repo, prs }) => {
-      prs.sort((a, b) => b.mergedAt.localeCompare(a.mergedAt));
-      const work = prs
-        .slice(0, 3)
-        .map((p) => `[${p.title.replace(/[|[\]]/g, '\\$&')}](${p.url})`)
-        .join('<br>');
-      return `| [**${repo.nameWithOwner}**](${repo.url}) | ★ ${fmt(repo.stargazerCount)} | ${prs.length} | ${work} |`;
-    });
-  const lines = [
-    '| Project | Stars | Merged PRs | Recent work |',
-    '|---|---:|---:|---|',
-    ...rows,
-  ];
-  if (open.length) {
-    lines.push('', '**In review**', '');
-    for (const p of open.sort((a, b) => b.createdAt.localeCompare(a.createdAt))) {
-      lines.push(`- [${p.repository.nameWithOwner}](${p.repository.url}): [${p.title.replace(/[[\]]/g, '\\$&')}](${p.url})`);
-    }
-  }
-  return lines.join('\n');
+    if (!byRepo.has(k)) byRepo.set(k, { repo: pr.repository, merged: [], open: [] });
+    byRepo.get(k)[key].push(pr);
+  };
+  merged.forEach((p) => add(p, 'merged'));
+  open.forEach((p) => add(p, 'open'));
+  const link = (p) => `[${p.title.replace(/[[\]]/g, '\\$&')}](${p.url})`;
+  return [...byRepo.values()]
+    .sort((a, b) => b.merged.length - a.merged.length || b.repo.stargazerCount - a.repo.stargazerCount)
+    .map(({ repo, merged: m, open: o }) => {
+      m.sort((a, b) => b.mergedAt.localeCompare(a.mergedAt));
+      o.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+      const counts = [m.length && `**${m.length} merged**`, o.length && `${o.length} in review`].filter(Boolean).join(' · ');
+      const items = [...m.slice(0, 3).map((p) => `  - ${link(p)}`), ...o.slice(0, 2).map((p) => `  - ${link(p)} · *in review*`)];
+      return [`- [**${repo.nameWithOwner}**](${repo.url})${repo.stargazerCount ? ` · ★ ${fmt(repo.stargazerCount)}` : ''} · ${counts}`, ...items].join('\n');
+    })
+    .join('\n');
 }
 
 function replaceBetween(text, tag, body) {
@@ -384,12 +383,16 @@ const [user, merged, openExternal] = await Promise.all([
 const external = merged.filter((p) => p.repository.owner.login.toLowerCase() !== LOGIN.toLowerCase());
 const days = user.contributionsCollection.contributionCalendar.weeks.flatMap((w) => w.contributionDays);
 const metrics = {
-  mergedPrs: merged.length,
+  ownMerged: merged.length - external.length,
+  ossOpen: openExternal.length,
+  ossOpenNames: [...new Set(openExternal.map((p) => p.repository.nameWithOwner.split('/')[1]))],
+  ossTop: topRepo(external),
+  ossTopName: topOf(external)?.repository.nameWithOwner.split('/')[1] ?? 'none yet',
+  ossTopStars: topOf(external)?.repository.stargazerCount ?? 0,
   ossMerged: external.length,
   ossRepos: new Set(external.map((p) => p.repository.nameWithOwner)).size,
   ossStars: [...new Map(external.map((p) => [p.repository.nameWithOwner, p.repository.stargazerCount])).values()].reduce((a, b) => a + b, 0),
   contributions: user.contributionsCollection.contributionCalendar.totalContributions,
-  medianPr: median(merged.map((p) => p.additions + p.deletions)),
   weekly: user.contributionsCollection.contributionCalendar.weeks.map((w) =>
     w.contributionDays.reduce((s, d) => s + d.contributionCount, 0),
   ),
@@ -400,7 +403,7 @@ const metrics = {
 };
 
 await mkdir('assets', { recursive: true });
-await writeFile('assets/header.svg', headerSvg());
+await writeFile('assets/header.svg', headerSvg(metrics));
 for (const key of Object.keys(BUTTONS)) await writeFile(`assets/btn-${key}.svg`, buttonSvg(THEMES.dark, key));
 for (const [name, theme] of Object.entries(THEMES)) {
   await writeFile(`assets/metrics-${name}.svg`, metricsSvg(theme, metrics));
