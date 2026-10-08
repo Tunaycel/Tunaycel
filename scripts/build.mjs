@@ -120,7 +120,7 @@ const SESSION = [
   ['cat role.yml', [[['cyan', 'role'], ['muted', ': '], ['text', '[full-stack, ai-research, agent-orchestration, bug-hunting]']]]],
   ['ls ~/work', [[
     ['blue', 'bluesense/'], ['muted', ' aws infra + 2 apps   '],
-    ['blue', 'voxgig/'], ['muted', ' oss sdks   '],
+    ['blue', 'voxgig/'], ['muted', ' oss contributor   '],
     ['blue', 'nest2move/'], ['muted', ' b2b saas   '],
     ['blue', 'birthday-msg/'], ['muted', ' admin'],
   ]]],
