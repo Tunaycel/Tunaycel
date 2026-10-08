@@ -13,32 +13,17 @@ I find to the projects that own them. Final-year Computer Science student at WSB
 
 ## Now
 
-- **BlueSense** · Back End Developer, intern · Sep 2026 →<br>
-  Smart Beauty's AWS infrastructure and two new apps; 23+ merged PRs with regression tests.
-- **Voxgig** · Open Source Contributor · Oct 2026 →<br>
-  [Resend SDK](https://github.com/Tunaycel/resend-voxgig-sdk) on Voxgig tooling (522 tests) and a [critical article on Jostraca](https://github.com/Tunaycel/jostraca-critical-review/blob/main/article.md), its code generator.
-- **Nest2Move** · Software Development, intern · Mar 2026 →<br>
-  Pro2Move procurement modules, JWT auth, and a local Ollama/Qwen pipeline enriching ~110 company sites.
-- **Birthday Messaging** · Software Development & Cybersecurity, intern · Oct 2026 →<br>
-  Multi-tier admin dashboard with role-based access across four account levels.
+<a href="https://linkedin.com/in/huseyin-tunay-celik"><img alt="BlueSense, Voxgig, Nest2Move and Birthday Messaging: current roles" src="assets/now.svg" width="100%"></a>
 
 ## Open source
 
-Refreshed daily from the GitHub API.
+Refreshed daily from the GitHub API. Each card opens my pull requests in that project.
 
 <!-- OSS:START -->
-- [**assistant-ui/assistant-ui**](https://github.com/assistant-ui/assistant-ui) · ★ 12.4k · **5 merged**
-  - [fix(react-markdown): keep code spans intact after a lone backtick in an earlier block](https://github.com/assistant-ui/assistant-ui/pull/9025)
-  - [fix(ai-sdk): stop sending the response being reloaded back to the model](https://github.com/assistant-ui/assistant-ui/pull/9028)
-  - [docs(langgraph): restrict the production proxy snippet to same-origin requests](https://github.com/assistant-ui/assistant-ui/pull/8980)
-- [**anthropics/sandbox-runtime**](https://github.com/anthropics/sandbox-runtime) · ★ 5,477 · 2 in review
-  - [fix: coordinate sandbox startup, reset, and failure cleanup](https://github.com/anthropics/sandbox-runtime/pull/677) · *in review*
-  - [fix: compare repeated filesystem path entries consistently](https://github.com/anthropics/sandbox-runtime/pull/676) · *in review*
-- [**UKGovernmentBEIS/control-arena**](https://github.com/UKGovernmentBEIS/control-arena) · ★ 250 · 1 in review
-  - [feat(apps): support isolated secret-input validators](https://github.com/UKGovernmentBEIS/control-arena/pull/899) · *in review*
-- [**voxgig/apidef**](https://github.com/voxgig/apidef) · 2 in review
-  - [fix: emit canonical validators for file and unknown types](https://github.com/voxgig/apidef/pull/171) · *in review*
-  - [fix: preserve nullable entity field types](https://github.com/voxgig/apidef/pull/170) · *in review*
+<a href="https://github.com/assistant-ui/assistant-ui/pulls?q=is%3Apr+author%3ATunaycel"><img alt="assistant-ui/assistant-ui: 5 merged, 0 in review" src="assets/oss/assistant-ui--assistant-ui.svg" width="100%"></a>
+<a href="https://github.com/anthropics/sandbox-runtime/pulls?q=is%3Apr+author%3ATunaycel"><img alt="anthropics/sandbox-runtime: 0 merged, 2 in review" src="assets/oss/anthropics--sandbox-runtime.svg" width="100%"></a>
+<a href="https://github.com/UKGovernmentBEIS/control-arena/pulls?q=is%3Apr+author%3ATunaycel"><img alt="UKGovernmentBEIS/control-arena: 0 merged, 1 in review" src="assets/oss/UKGovernmentBEIS--control-arena.svg" width="100%"></a>
+<a href="https://github.com/voxgig/apidef/pulls?q=is%3Apr+author%3ATunaycel"><img alt="voxgig/apidef: 0 merged, 2 in review" src="assets/oss/voxgig--apidef.svg" width="100%"></a>
 <!-- OSS:END -->
 
 ## Thesis
@@ -57,7 +42,7 @@ Refreshed daily from the GitHub API.
   `Tauri` `Rust` `React`
 - [**resend-voxgig-sdk**](https://github.com/Tunaycel/resend-voxgig-sdk) · TypeScript SDK generated from Resend's OpenAPI spec, 522 tests on Ubuntu and Windows CI.
   `TypeScript` `Voxgig`
-- [**jostraca-critical-review**](https://github.com/Tunaycel/jostraca-critical-review) · Eight executable experiments on what survives when generated code is edited by hand.
+- [**jostraca-critical-review**](https://github.com/Tunaycel/jostraca-critical-review) · [Critical article](https://github.com/Tunaycel/jostraca-critical-review/blob/main/article.md) on Voxgig's code generator, backed by eight executable experiments on what survives when generated code is edited by hand.
   `TypeScript` `Node.js`
 - [**PlusEmlak**](https://github.com/Tunaycel/emlakplus-ai-case-study) · Real-estate CRM and AI marketing SaaS; I owned the frontend in a team of three. *Case study.*
   `Next.js 16` `React 19` `Playwright`

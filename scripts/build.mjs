@@ -1,6 +1,6 @@
 // Builds the profile cards and the open-source section of README.md from the GitHub API.
 // Only public data is used, so the output is the same whichever token runs it.
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 
 const LOGIN = process.env.PROFILE_LOGIN || 'Tunaycel';
 const TOKEN = process.env.GITHUB_TOKEN;
@@ -344,7 +344,77 @@ ${legend}
 
 // ---------- README section ----------
 
-function ossSection(merged, open) {
+// ---------- README cards ----------
+// Markdown cannot colour or align text, so "Now" and the open-source list are drawn as cards.
+// Each open-source card is its own image, so each one links to its own pull requests.
+
+const CARD = { ...TERM, star: '#e3b341', amber: '#d29922' };
+const CARD_W = 840;
+
+// rough advance widths for the sans stack, enough to truncate before the right-hand column
+const sansWidth = (s, size) => [...s].reduce((w, c) => w + (/[A-Z@#%&mwMW]/.test(c) ? 0.68 : /[ilj.,:;'|!()[\] ]/.test(c) ? 0.3 : 0.53), 0) * size;
+function clip(s, size, max) {
+  if (sansWidth(s, size) <= max) return s;
+  let out = s;
+  while (out.length && sansWidth(`${out}…`, size) > max) out = out.slice(0, -1);
+  return `${out.trimEnd()}…`;
+}
+
+function pill(xRight, y, label, colour) {
+  const w = sansWidth(label, 12) + 22;
+  const x = xRight - w;
+  return {
+    w,
+    svg: `<rect x="${x}" y="${y - 15}" width="${w}" height="22" rx="11" fill="${colour}" fill-opacity="0.15" stroke="${colour}" stroke-opacity="0.5"/><text x="${x + w / 2}" y="${y}" text-anchor="middle" fill="${colour}" font-family="${FONT}" font-size="12" font-weight="600">${esc(label)}</text>`,
+  };
+}
+
+const stars = (n) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k` : String(n));
+const day = (iso) => new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+function repoCardSvg({ repo, merged, open }) {
+  const t = CARD;
+  const W = CARD_W;
+  const rows = [
+    ...merged.slice(0, 3).map((p) => ({ p, state: 'merged', when: p.mergedAt })),
+    ...open.slice(0, 2).map((p) => ({ p, state: 'in review', when: p.createdAt })),
+  ];
+  const H = 62 + rows.length * 26 + 12;
+  const [owner, name] = repo.nameWithOwner.split('/');
+
+  let right = W - 20;
+  const pills = [];
+  if (open.length) {
+    const p = pill(right, 31, `${open.length} in review`, t.amber);
+    pills.push(p.svg);
+    right -= p.w + 8;
+  }
+  if (merged.length) pills.push(pill(right, 31, `${merged.length} merged`, t.green).svg);
+
+  const body = rows
+    .map(({ p, state, when }, i) => {
+      const y = 76 + i * 26;
+      const colour = state === 'merged' ? t.green : t.amber;
+      const dot = state === 'merged'
+        ? `<circle cx="27" cy="${y - 4.5}" r="4.5" fill="${colour}"/>`
+        : `<circle cx="27" cy="${y - 4.5}" r="4" fill="none" stroke="${colour}" stroke-width="1.8"/>`;
+      return `${dot}<text x="42" y="${y}" fill="${t.text}" font-family="${FONT}" font-size="13.5">${esc(clip(p.title, 13.5, W - 42 - 170))}</text><text x="${W - 20}" y="${y}" text-anchor="end" fill="${t.muted}" font-family="${MONO}" font-size="12">${state} · ${esc(day(when))}</text>`;
+    })
+    .join('\n');
+
+  const label = `${repo.nameWithOwner}: ${merged.length} merged, ${open.length} in review. ${rows.map((r) => `${r.p.title} (${r.state})`).join('; ')}`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">
+<rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="10" fill="${t.bg}" stroke="${t.line}"/>
+<text x="20" y="35" font-family="${FONT}" font-size="16"><tspan fill="${t.muted}">${esc(owner)} / </tspan><tspan fill="${t.blue}" font-weight="700">${esc(name)}</tspan></text>
+${repo.stargazerCount ? `<text x="380" y="35" fill="${t.star}" font-family="${FONT}" font-size="14" font-weight="600">★ ${esc(stars(repo.stargazerCount))}</text>` : ''}
+${pills.join('\n')}
+<line x1="20" y1="50.5" x2="${W - 20}" y2="50.5" stroke="${t.line}"/>
+${body}
+</svg>
+`;
+}
+
+function groupByRepo(merged, open) {
   const byRepo = new Map();
   const add = (pr, key) => {
     const k = pr.repository.nameWithOwner;
@@ -353,15 +423,52 @@ function ossSection(merged, open) {
   };
   merged.forEach((p) => add(p, 'merged'));
   open.forEach((p) => add(p, 'open'));
-  const link = (p) => `[${p.title.replace(/[[\]]/g, '\\$&')}](${p.url})`;
   return [...byRepo.values()]
-    .sort((a, b) => b.merged.length - a.merged.length || b.repo.stargazerCount - a.repo.stargazerCount)
-    .map(({ repo, merged: m, open: o }) => {
-      m.sort((a, b) => b.mergedAt.localeCompare(a.mergedAt));
-      o.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-      const counts = [m.length && `**${m.length} merged**`, o.length && `${o.length} in review`].filter(Boolean).join(' · ');
-      const items = [...m.slice(0, 3).map((p) => `  - ${link(p)}`), ...o.slice(0, 2).map((p) => `  - ${link(p)} · *in review*`)];
-      return [`- [**${repo.nameWithOwner}**](${repo.url})${repo.stargazerCount ? ` · ★ ${fmt(repo.stargazerCount)}` : ''} · ${counts}`, ...items].join('\n');
+    .map((g) => ({
+      ...g,
+      merged: g.merged.sort((a, b) => b.mergedAt.localeCompare(a.mergedAt)),
+      open: g.open.sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
+    }))
+    .sort((a, b) => b.merged.length - a.merged.length || b.repo.stargazerCount - a.repo.stargazerCount);
+}
+
+const NOW = [
+  ['BlueSense', 'Back End Developer, intern', 'Sep 2026', "Smart Beauty's AWS infrastructure and two new apps; 23+ merged PRs with regression tests"],
+  ['Voxgig', 'Open Source Contributor', 'Oct 2026', 'Resend SDK on Voxgig tooling (522 tests) and a critical article on Jostraca'],
+  ['Nest2Move', 'Software Development, intern', 'Mar 2026', 'Pro2Move procurement, JWT auth, a local Ollama/Qwen pipeline over ~110 sites'],
+  ['Birthday Messaging', 'Software Dev & Cybersecurity, intern', 'Oct 2026', 'Multi-tier admin dashboard with role-based access across four account levels'],
+];
+
+function nowSvg() {
+  const t = CARD;
+  const W = CARD_W;
+  const ROW = 58;
+  const H = 18 + NOW.length * ROW + 4;
+  const COL = 196;
+  const rows = NOW.map(([org, role, since, what], i) => {
+    const y = 18 + i * ROW;
+    const sep = i ? `<line x1="20" y1="${y - 4.5}" x2="${W - 20}" y2="${y - 4.5}" stroke="${t.line}" stroke-dasharray="2 4"/>` : '';
+    return `${sep}
+<circle cx="27" cy="${y + 17}" r="4" fill="${t.green}"/>
+<text x="42" y="${y + 22}" fill="${t.text}" font-family="${FONT}" font-size="15" font-weight="700">${esc(org)}</text>
+<text x="${COL}" y="${y + 22}" fill="${t.text}" font-family="${FONT}" font-size="14">${esc(role)}</text>
+<text x="${W - 20}" y="${y + 22}" text-anchor="end" fill="${t.muted}" font-family="${MONO}" font-size="12">since ${esc(since)}</text>
+<text x="${COL}" y="${y + 42}" fill="${t.muted}" font-family="${FONT}" font-size="13">${esc(clip(what, 13, W - COL - 20))}</text>`;
+  }).join('\n');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(NOW.map((r) => `${r[0]}: ${r[1]} since ${r[2]}. ${r[3]}`).join(' '))}">
+<rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="10" fill="${t.bg}" stroke="${t.line}"/>
+${rows}
+</svg>
+`;
+}
+
+function ossSection(groups) {
+  return groups
+    .map(({ repo, merged, open }) => {
+      const file = `assets/oss/${repo.nameWithOwner.replace('/', '--')}.svg`;
+      const href = `${repo.url}/pulls?q=is%3Apr+author%3A${LOGIN}`;
+      const alt = `${repo.nameWithOwner}: ${merged.length} merged, ${open.length} in review`;
+      return `<a href="${href}"><img alt="${esc(alt)}" src="${file}" width="100%"></a>`;
     })
     .join('\n');
 }
@@ -410,6 +517,11 @@ for (const [name, theme] of Object.entries(THEMES)) {
 }
 
 const readme = await readFile('README.md', 'utf8');
-await writeFile('README.md', replaceBetween(readme, 'OSS', ossSection(external, openExternal)));
+const groups = groupByRepo(external, openExternal);
+await rm('assets/oss', { recursive: true, force: true });
+await mkdir('assets/oss', { recursive: true });
+for (const g of groups) await writeFile(`assets/oss/${g.repo.nameWithOwner.replace('/', '--')}.svg`, repoCardSvg(g));
+await writeFile('assets/now.svg', nowSvg());
+await writeFile('README.md', replaceBetween(readme, 'OSS', ossSection(groups)));
 
 console.log(JSON.stringify({ ...metrics, weekly: undefined, langs: metrics.langs.map((l) => l.name) }));
