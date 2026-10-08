@@ -224,7 +224,7 @@ function headerSvg() {
 <rect width="${W}" height="34" fill="${t.bar}"/>
 <line x1="0" y1="34.5" x2="${W}" y2="34.5" stroke="${t.line}"/>
 <circle cx="18" cy="17" r="5.5" fill="#ff5f57"/><circle cx="36" cy="17" r="5.5" fill="#febc2e"/><circle cx="54" cy="17" r="5.5" fill="#28c840"/>
-<text x="${W / 2}" y="21.5" text-anchor="middle" fill="${t.muted}" font-family="${MONO}" font-size="12">tunay@wroclaw: ~ — zsh — 120×${VISIBLE}</text>
+<text x="${W / 2}" y="21.5" text-anchor="middle" fill="${t.muted}" font-family="${MONO}" font-size="12">Hüseyin Tunay Çelik — ~/github/Tunaycel — zsh</text>
 <g clip-path="url(#win)"><g>${scroll}
 ${body}
 </g></g>

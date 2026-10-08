@@ -1,4 +1,4 @@
-<img alt="Terminal session: Hüseyin Tunay Çelik, full-stack engineer, AI researcher and agent orchestrator, bug hunter" src="assets/header.svg" width="100%">
+<a href="https://www.huseyintunaycelik.xyz"><img alt="Terminal session: Hüseyin Tunay Çelik, full-stack engineer, AI researcher and agent orchestrator, bug hunter" src="assets/header.svg" width="100%"></a>
 
 <p align="center">
   <a href="https://www.huseyintunaycelik.xyz"><img alt="Portfolio: huseyintunaycelik.xyz" src="assets/btn-portfolio.svg" height="48"></a>
