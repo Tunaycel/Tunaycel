@@ -24,6 +24,7 @@ Refreshed daily from the GitHub API. Each card opens my pull requests in that pr
 <a href="https://github.com/voxgig/apidef/pulls?q=is%3Apr+author%3ATunaycel"><img alt="voxgig/apidef: 1 merged, 1 in review" src="assets/oss/voxgig--apidef.svg" width="100%"></a>
 <a href="https://github.com/anthropics/sandbox-runtime/pulls?q=is%3Apr+author%3ATunaycel"><img alt="anthropics/sandbox-runtime: 0 merged, 2 in review" src="assets/oss/anthropics--sandbox-runtime.svg" width="100%"></a>
 <a href="https://github.com/UKGovernmentBEIS/control-arena/pulls?q=is%3Apr+author%3ATunaycel"><img alt="UKGovernmentBEIS/control-arena: 0 merged, 1 in review" src="assets/oss/UKGovernmentBEIS--control-arena.svg" width="100%"></a>
+<a href="https://github.com/Git-Hospital/helmbulance/pulls?q=is%3Apr+author%3ATunaycel"><img alt="Git-Hospital/helmbulance: 0 merged, 3 in review" src="assets/oss/Git-Hospital--helmbulance.svg" width="100%"></a>
 <!-- OSS:END -->
 
 ## Thesis
