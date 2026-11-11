@@ -20,7 +20,7 @@ I find to the projects that own them. Final-year Computer Science student at WSB
 Refreshed daily from the GitHub API. Each card opens my pull requests in that project.
 
 <!-- OSS:START -->
-<a href="https://github.com/Git-Hospital/helmbulance/pulls?q=is%3Apr+author%3ATunaycel"><img alt="Git-Hospital/helmbulance: 6 merged, 4 in review" src="assets/oss/Git-Hospital--helmbulance.svg" width="100%"></a>
+<a href="https://github.com/Git-Hospital/helmbulance/pulls?q=is%3Apr+author%3ATunaycel"><img alt="Git-Hospital/helmbulance: 8 merged, 2 in review" src="assets/oss/Git-Hospital--helmbulance.svg" width="100%"></a>
 <a href="https://github.com/assistant-ui/assistant-ui/pulls?q=is%3Apr+author%3ATunaycel"><img alt="assistant-ui/assistant-ui: 5 merged, 0 in review" src="assets/oss/assistant-ui--assistant-ui.svg" width="100%"></a>
 <a href="https://github.com/voxgig/apidef/pulls?q=is%3Apr+author%3ATunaycel"><img alt="voxgig/apidef: 1 merged, 0 in review" src="assets/oss/voxgig--apidef.svg" width="100%"></a>
 <a href="https://github.com/anthropics/sandbox-runtime/pulls?q=is%3Apr+author%3ATunaycel"><img alt="anthropics/sandbox-runtime: 0 merged, 2 in review" src="assets/oss/anthropics--sandbox-runtime.svg" width="100%"></a>
